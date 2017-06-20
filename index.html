@@ -6,6 +6,7 @@
 	<meta name="referrer" content="never">
 	<title>豆瓣一刻</title>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<link rel="stylesheet/" type="text/css" href="./public/less/base.less">
 	<link rel="stylesheet/less" href="./public/less/main.less">
 	<script src="./public/libs/less.js"></script>
 
@@ -15,8 +16,15 @@
 
 	<!-- 业务逻辑 -->
 	<script src="./scripts/app.js"></script>
+	<script src="./scripts/rely/rely.js"></script>
+	<script src="./scripts/rely/relyConfig.js"></script>
+	<script src="./scripts/rely/relyNavsCtrl.js"></script>
+	<script src="./scripts/rely/relyOlderCtrl.js"></script>
+	<script src="./scripts/rely/relyRun.js"></script>
+	<script src="./scripts/rely/relyTodayCtrl.js"></script>
+
 </head>
-<body ng-app="Yike">
+<body ng-app="Yike"
 	<div class="viewport">
 		<!-- 侧边导航 -->
 		<div ng-class="{navs: true, collapse: collapsed}" ng-controller="NavsCtrl">
@@ -27,7 +35,7 @@
 					</div>
 					<span>登录</span>
 				</dt>
-				<dd class="active" ng-click="toggle()" ng-repeat="nav in navs">
+				<dd ng-class="{active: $index == key}" ng-click="toggle()" ng-repeat="nav in navs">
 					<a href="{{nav.link}}" class="{{nav.icon}}">
 						<span>{{nav.text}}</span>
 					</a>
@@ -38,19 +46,19 @@
 				<a href="javascript:;" class="icon-download">离线</a>
 			</div>
 		</div>
-		<div ng-class="container">
+		<div class="container">
 			<!-- 头部 -->
 			<div ng-class="{header: true, collapse: collapsed}">
 				<a href="javascript:;" class="menu icon-menu" ng-click="toggle()"></a>
-				<h2>今日一刻</h2>
+				<h2>{{title}}</h2>
 				<a href="javascript:;" class="search icon-search"></a>
 			</div>
 			<!-- 主体 -->
 			<div ng-class="{body: true, collapse: collapsed}" >
 				<!-- 加载动态图 -->
-				<div class="loading" ng-hide="loaded">
-					<img src="./public/images/loading.gif" alt="">
-				</div>
+				<!-- <div class="loading" ng-hide="loaded"> -->
+					<img src="./public/images/loading.gif" alt="" ng-hide="loaded" class="loading">
+				<!-- </div> -->
 
 				<div ng-view></div>
 			</div>
